@@ -1,3 +1,7 @@
+body {
+  font-family: "Trebuchet MS", Helvetica, Geneva, Arial, sans-serif;
+}
+
 ul {
   list-style: none;
 }
@@ -25,7 +29,6 @@ body {
   border: 0;
   outline: 0;
   font-size: 100%;
-  vertical-align: baseline;
 }
 
 #page header {
@@ -37,8 +40,8 @@ body {
       -ms-flex-direction: row;
           flex-direction: row;
   width: 100%;
+  margin: 0 auto;
   background: url("../images/personalized-pics-1400x240.png") center center no-repeat;
-  background-size: cover;
 }
 
 #page header .logo {
@@ -55,7 +58,6 @@ body {
   margin-left: auto;
   padding: 1rem;
   text-transform: uppercase;
-  font-family: 'Trebuchet MS',Helvetica,Geneva,Arial,sans-serif;
   font-weight: 700;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -112,9 +114,17 @@ body {
   background-color: #244566;
 }
 
-#page .globalnav {
+#page .nav-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+#page .nav-wrap .global-nav {
   text-transform: uppercase;
-  font-family: 'Trebuchet MS',Helvetica,Geneva,Arial,sans-serif;
   font-weight: 700;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -128,9 +138,10 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 100%;
 }
 
-#page .globalnav ul {
+#page .nav-wrap .global-nav ul {
   background-color: #32608F;
   text-decoration: none;
   padding: 0;
@@ -148,7 +159,7 @@ body {
   width: 100%;
 }
 
-#page .globalnav ul li {
+#page .nav-wrap .global-nav ul li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -161,13 +172,64 @@ body {
   font-size: 1.1rem;
 }
 
-#page .globalnav ul li a {
+#page .nav-wrap .global-nav ul li a {
   text-decoration: none;
   color: #ffffff;
   padding: .7rem 1rem;
 }
 
-#page .globalnav ul li a:hover {
+#page .nav-wrap .global-nav ul li a:hover {
   background-color: #244566;
+}
+
+#page .nav-wrap section.search {
+  margin-top: -3rem;
+  margin-left: -17.7rem;
+  -webkit-box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15);
+          box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15);
+  background-color: #F7D94F;
+  padding: 0.8rem;
+  width: 15rem;
+}
+
+#page .nav-wrap section.search h2 {
+  color: #333333;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+#page .nav-wrap section.search input {
+  margin: 0.5rem 0;
+  padding: 0.2rem;
+  outline: none;
+}
+
+#page .nav-wrap section.search label {
+  display: block;
+}
+
+#page .nav-wrap section.search button {
+  background-color: #32608F;
+  outline: none;
+  border: none;
+  color: #e1e1e1;
+  padding: 0.2rem 0.5rem;
+}
+
+#page .content-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1130px;
+  height: 100px;
+  background-color: red;
 }
 /*# sourceMappingURL=style.css.map */

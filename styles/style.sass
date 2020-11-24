@@ -1,11 +1,16 @@
 $blue: #32608F
 $alink: #ffffff
 $alinkhover: #244566
+$font: 'Trebuchet MS',Helvetica,Geneva,Arial,sans-serif
 
+body
+  font-family: $font
+
+@mixin box-shadow-both
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15);
 
 @mixin navigation
   text-transform: uppercase
-  font-family: 'Trebuchet MS',Helvetica,Geneva,Arial,sans-serif
   font-weight: 700
   display: flex
   flex-direction: row
@@ -33,8 +38,6 @@ $alinkhover: #244566
         &:hover
           background-color: $alinkhover
 
-
-
 ul
   list-style: none
 
@@ -52,14 +55,14 @@ body
   border: 0
   outline: 0
   font-size: 100%
-  vertical-align: baseline
   
   header 
     display: flex
     flex-direction: row
     width: 100%
+    margin: 0 auto
     background: url('../images/personalized-pics-1400x240.png') center center no-repeat
-    background-size: cover
+    
     .logo
       height: 172px
       background-color: $blue
@@ -71,11 +74,47 @@ body
       margin-left: auto
       padding: 1rem
       @include navigation
-
-
-
             
-  .globalnav
-    @include navigation
+  .nav-wrap
+    display: flex
+    align-items: flex-start 
+    .global-nav
+      @include navigation
+      width: 100%
+      
+    section
+      &.search
+        margin-top: -3rem
+        margin-left: -17.7rem
+        @include box-shadow-both
+        background-color: #F7D94F
+        padding: 0.8rem
+        width: 15rem 
+        h2
+          color: #333333
+          padding: 0
+          margin: 0
+          font-size: 1rem
+          text-transform: uppercase
+        input
+          margin: 0.5rem 0
+          padding: 0.2rem
+          outline: none
 
-
+        label
+          display: block
+        button
+          background-color: $blue
+          outline: none
+          border: none
+          color: #e1e1e1
+          padding: 0.2rem 0.5rem
+  
+  .content-wrap
+    display: flex
+    flex-direction: row
+    margin: 0 auto
+    width: 100%
+    max-width: 1130px
+    height: 100px
+    background-color: red
