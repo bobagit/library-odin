@@ -1,0 +1,173 @@
+ul {
+  list-style: none;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+#page header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  background: url("../images/personalized-pics-1400x240.png") center center no-repeat;
+  background-size: cover;
+}
+
+#page header .logo {
+  height: 172px;
+  background-color: #32608F;
+}
+
+#page header .logo img {
+  width: 100px;
+}
+
+#page header .topnav {
+  margin-top: -4rem;
+  margin-left: auto;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-family: 'Trebuchet MS',Helvetica,Geneva,Arial,sans-serif;
+  font-weight: 700;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#page header .topnav ul {
+  background-color: #32608F;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  -webkit-box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: auto;
+  width: 100%;
+}
+
+#page header .topnav ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.1rem;
+}
+
+#page header .topnav ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: .7rem 1rem;
+}
+
+#page header .topnav ul li a:hover {
+  background-color: #244566;
+}
+
+#page .globalnav {
+  text-transform: uppercase;
+  font-family: 'Trebuchet MS',Helvetica,Geneva,Arial,sans-serif;
+  font-weight: 700;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#page .globalnav ul {
+  background-color: #32608F;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  -webkit-box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: auto;
+  width: 100%;
+}
+
+#page .globalnav ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.1rem;
+}
+
+#page .globalnav ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: .7rem 1rem;
+}
+
+#page .globalnav ul li a:hover {
+  background-color: #244566;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/style.css">
+  <title>Book</title>
+</head>
+<body>
+
+<div id="page">
+<header>
+
+  <div class="logo">
+    <img src="images/logo-clear-2x.png">
+  </div>
+
+  <div class="topnav">
+    <ul>
+      <li><a href="#">My Account</a></li>
+      <li><a href="#">Kids</a></li>
+      <li><a href="#">Teens</a></li>
+    </ul>
+  </div>
+
+</header>
+<div class="globalnav">
+  <ul>
+    <li><a href="#">Explore</a></li>
+    <li><a href="#">Events</a></li>
+    <li><a href="#">Locations</a></li>
+    <li><a href="#">Using Your Library</a></li>
+  </ul>
+</div>
+
+</div>
+
+
+  <script>
+  let myLibrary = [ 
+    { 
+      title: "The Definitive Guide to Horse Breeding",
+      author: "Sir King Winsley",
+      numPages: 924,
+      readStatus: false, 
+    },
+
+    {
+      title: "How Is It Possible That People Still Believe in Homeopathy",
+      author: "Dr. Elloit Charmer",
+      numPages: 230,
+      readStatus: false,
+    },
+
+    {
+      title: "From the Moon To Mars, How To Avoid Talking To A Vegan",
+      author: "Dennis McChaplin",
+      numPages: 1322,
+      readStatus: true
+    }
+    
+  ];
+  
+    // write a constructor for making Book objects
+    // object should include title, author, pages, readBook?
+
+function Book(title, author, numPages, readStatus) {
+  this.title = title,
+  this.author = author,
+  this.numPages = numPages,
+  this.readStatus = readStatus,
+  this.info = function() {
+    return `${title} by ${author}, ${numPages} pages, ${readStatus}`
+  }
+}
+
+function addBookToLibrary() {
+  // do stuff
+}
+
+let theHobbit = new Book("The Hobbit", "J.R.R Tolkien", 295, false);
+myLibrary.push(theHobbit)
+for (let i = 0; i < myLibrary.length; i++) {
+  console.log(myLibrary[i].title, myLibrary[i].numPages) 
+}
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
