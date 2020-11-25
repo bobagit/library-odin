@@ -155,10 +155,12 @@ body
   
   .content-wrap
     display: flex
-    justify-content: space-between
-    margin-top: 2rem 
+    justify-content: flex-start
+    max-width: $max-width
+    margin: 4rem auto
+    width: 100%
     .add-book
-      width: 48%
+      width: 35%
       max-width: $max-width
       padding: 0rem 1rem
       
@@ -182,8 +184,15 @@ body
           margin: 0.5rem 0 0
 
     .library
-      width: 48%
-      
+      width: 50%
+      .results
+        .title
+        .secondary
+          padding: 0.3rem 0 2rem
+          font-size: 0.95rem
+          color: #888
+          font-style: italic
+          font-weight: 100
 
 
 @media (max-width: 850px)
