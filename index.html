@@ -47,8 +47,29 @@
   </div>
 </div>
   
-  <!-- <section class="content-wrap">
-</section> -->
+  <section class="content-wrap">
+  <h2>Reading Library</h2>
+  <p>Track the status of your books.</p>
+  
+  <div class="add-book">
+   <form>
+   <label>Title</label>
+   <input id="title" data-title="title">
+   <label>Author</label>
+   <input data-author="author">
+   <label>Pages</label>
+   <input data-pages="pages">
+    <div class="read-status">
+       <label>Finished book?</label>
+       <input class="checkbox" type="checkbox" id="read" name="read" value="read" data-read="read">
+    </div>
+
+    <button type="submit" id="add-submit">Add</button>
+    </form>
+  </div>
+
+
+  </section>
   <script>
   let myLibrary = [ 
     { 
@@ -81,21 +102,24 @@ function Book(title, author, numPages, readStatus) {
   this.title = title,
   this.author = author,
   this.numPages = numPages,
-  this.readStatus = readStatus,
-  this.info = function() {
-    return `${title} by ${author}, ${numPages} pages, ${readStatus}`
-  }
+  this.readStatus = readStatus
 }
 
 function addBookToLibrary() {
-  // do stuff
+  // eventListener on "Add" button
+  let addBook = document.querySelector('button#add-submit')
+    .addEventListener('click', function() {
+      let title = document.querySelector('input[data-title="title"]').value
+    });
+  
+  // get data from all fields, add to object, add to myLibrary array
 }
 
-let theHobbit = new Book("The Hobbit", "J.R.R Tolkien", 295, false);
-myLibrary.push(theHobbit)
-for (let i = 0; i < myLibrary.length; i++) {
-  console.log(myLibrary[i].title, myLibrary[i].numPages) 
-}
+// let theHobbit = new Book("The Hobbit", "J.R.R Tolkien", 295, false);
+// myLibrary.push(theHobbit)
+// for (let i = 0; i < myLibrary.length; i++) {
+//   console.log(myLibrary[i].title, myLibrary[i].numPages) 
+// }
 
 
 
