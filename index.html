@@ -61,7 +61,7 @@
    <input data-pages="pages">
     <div class="read-status">
        <label>Finished book?</label>
-       <input class="checkbox" type="checkbox" id="read" name="read" value="read" data-read="read">
+       <input class="checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
     </div>
 
     <button type="button" id="addbook">Add</button>
@@ -105,14 +105,22 @@ function Book(title, author, numPages, readStatus) {
   this.readStatus = readStatus
 }
 
-let addBook = document.getElementById('addbook').addEventListener('click', function() {
-    let title = document.querySelector('input[data-title="title"]').value
-    console.log(title)
-});
+
 
 function addBookToLibrary() {
-  // eventListener on "Add" button
-    };
+  let addBook = document.getElementById('addbook').addEventListener('click', function () {
+  let title = document.querySelector('[data-title]').value
+  let author = document.querySelector('[data-author]').value
+  let pages = document.querySelector('[data-pages]').value 
+  let read = false
+  document.querySelector('[data-read]').checked ? read = true : read = false
+  // add to library
+  myLibrary.push(new Book(title, author, pages, read));
+  console.log(myLibrary)
+  });    
+};
+
+addBookToLibrary()
 
   // get data from all fields, add to object, add to myLibrary array
 
