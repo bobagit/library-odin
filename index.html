@@ -48,10 +48,11 @@
 </div>
   
   <section class="content-wrap">
-  <h2>Reading Library</h2>
-  <p>Track the status of your books.</p>
   
   <div class="add-book">
+  <h2>Add New Book</h2>
+  <p>Track the status of your books.</p>
+  
    <form>
    <label>Title</label>
    <input id="title" data-title="title">
@@ -64,8 +65,12 @@
        <input class="checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
     </div>
 
-    <button type="button" id="addbook">Add</button>
+    <button type="button" id="addbook">Save</button>
     </form>
+  </div>
+
+  <div class="library">
+    
   </div>
 
 
@@ -105,8 +110,6 @@ function Book(title, author, numPages, readStatus) {
   this.readStatus = readStatus
 }
 
-
-
 function addBookToLibrary() {
   let addBook = document.getElementById('addbook').addEventListener('click', function () {
   let title = document.querySelector('[data-title]').value
@@ -116,11 +119,20 @@ function addBookToLibrary() {
   document.querySelector('[data-read]').checked ? read = true : read = false
   // add to library
   myLibrary.push(new Book(title, author, pages, read));
-  console.log(myLibrary)
   });    
 };
 
+function displayLibraryBooks() {
+  let library = document.querySelector('.library')
+  for (let item in myLibrary) {
+    let newElement = document.createElement('div')  
+    newElement.innerHTML = myLibrary[item]["title"]
+    library.appendChild(newElement)
+  }
+}
+
 addBookToLibrary()
+displayLibraryBooks()
 
   // get data from all fields, add to object, add to myLibrary array
 
