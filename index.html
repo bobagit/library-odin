@@ -1,178 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/style.css">
   <title>Book</title>
 </head>
+
 <body>
-
-<div id="page">
-  <header>
-  <div class="inner-wrap">
-    <div class="logo">
-      <img src="images/logo-clear-2x.png">
+  <div id="page">
+    <header>
+      <div class="inner-wrap">
+        <div class="logo">
+          <img src="images/logo-clear-2x.png">
+        </div>
+        <div class="topnav">
+          <ul>
+            <li>
+              <a href="#">My Account</a>
+            </li>
+            <li>
+              <a href="#">Kids</a>
+            </li>
+            <li>
+              <a href="#">Teens</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="nav-wrap">
+      <div class="global-nav">
+        <ul>
+          <li>
+            <a href="#">Explore</a>
+          </li>
+          <li>
+            <a href="#">Events</a>
+          </li>
+          <li>
+            <a href="#">Locations</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <section class="search">
+          <h2>Find What You're Looking For</h2>
+          <form id="search-global-form">
+            <input id="search-field">
+            <button>Go</button>
+            <p>Odin Project Library Project</p>
+          </form>
+        </section>
+      </div>
     </div>
+    <section class="content-wrap">
+      <div class="add-book">
+        <h2>Add Book</h2>
+        <p>Add a new book to your library.</p>
+        <form>
+          <label>Title</label>
+          <input id="title" data-title="title">
+          <label>Author</label>
+          <input data-author="author">
+          <label>Pages</label>
+          <input data-pages="pages">
+          <div class="read-status">
+            <label>Finished book?</label>
+            <input class="checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
+          </div>
+          <button type="button" id="addbook">Save</button>
+        </form>
+      </div>
+      <div class="library">
+        <h2>Your Library</h2>
+        <div class="results"></div>
+      </div>
+    </section>
+    <script>
+      let myLibrary = [{
+        title: "The Definitive Guide to Horse Breeding",
+        author: "Sir King Winsley",
+        numPages: 924,
+        readStatus: false,
+      },
+      {
+        title: "How Is It Possible That People Still Believe in Homeopathy",
+        author: "Dr. Elloit Charmer",
+        numPages: 230,
+        readStatus: false,
+      },
+      {
+        title: "From the Moon To Mars, How To Avoid Talking To A Vegan",
+        author: "Dennis McChaplin",
+        numPages: 1322,
+        readStatus: true
+      }
+      ];
+
+      // write a constructor for making Book objects
+      // object should include title, author, pages, readBook?
+
+      function Book(title, author, numPages, readStatus, id) {
+        this.title = title,
+          this.author = author,
+          this.numPages = numPages,
+          this.readStatus = readStatus
+      }
+
+      function addBookToLibrary() {
+        let addBook = document.getElementById('addbook').addEventListener('click', function () {
+          let title = document.querySelector('[data-title]').value
+          let author = document.querySelector('[data-author]').value
+          let pages = document.querySelector('[data-pages]').value
+          let read = false
+          document.querySelector('[data-read]').checked ? read = true : read = false
+          myLibrary.push(new Book(title, author, pages, read));
+          displayLibraryBooks()
+        });
+      }
+
+      function updateEntry() {
+        let listOfBooks = document.querySelectorAll('.edit')
+        for (let i = 0; i < listOfBooks.length; i++) {
+            listOfBooks[i].addEventListener('click', function () {
+              alert(`Hello ${i}`)
+          
+          })
+        }
+      }
     
-    <div class="topnav">
-      <ul>
-        <li><a href="#">My Account</a></li>
-        <li><a href="#">Kids</a></li>
-        <li><a href="#">Teens</a></li>
-      </ul>
-    </div>
-  </div>
-    
-  </header>
+      function clear() {
+        document.querySelector('.results').innerHTML = ""
+        // clear
+        document.querySelector('[data-title]').innerHTML = ""
+        document.querySelector('[data-author]').innerHTML = ""
+        document.querySelector('[data-pages]').innerHTML = ""
+      }
 
-<div class="nav-wrap">
-   <div class="global-nav">
-    <ul>
-      <li><a href="#">Explore</a></li>
-      <li><a href="#">Events</a></li>
-      <li><a href="#">Locations</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
+      function displayLibraryBooks() {
+        clear()
+        let results = document.querySelector('.results')
 
+        for (let item in myLibrary) {
+          let title = document.createElement('div')
+          title.className = `title data-id-${item}`
+          title.innerHTML = `${myLibrary[item]["title"]}`
+          results.appendChild(title)
 
-  <section class="search">
-    <h2>Find What You're Looking For</h2>
-    <form id="search-global-form">
-      <input id="search-field">
-      <button>Go</button>
-      <p>Odin Project Library Project</p>
-    </form>
-  </section>
-  </div>
-</div>
-  
-  <section class="content-wrap">
-  
-  <div class="add-book">
-  <h2>Add New Book</h2>
-  <p>Track the status of your books.</p>
-  
-   <form>
-   <label>Title</label>
-   <input id="title" data-title="title">
-   <label>Author</label>
-   <input data-author="author">
-   <label>Pages</label>
-   <input data-pages="pages">
-    <div class="read-status">
-       <label>Finished book?</label>
-       <input class="checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
-    </div>
+          let htmlMessage = '';
+          if (myLibrary[item]["readStatus"]) {
+            htmlMessage = "Finished";
+          } else {
+            htmlMessage = "Not Read Yet";
+          }
 
-    <button type="button" id="addbook">Save</button>
-    </form>
-  </div>
+          let secondary = document.createElement('div')
+          secondary.className = `secondary data-id-${item}`
+          secondary.innerHTML = `by ${myLibrary[item]["author"]}, ${myLibrary[item]["numPages"]} pages (${htmlMessage})`
+          results.appendChild(secondary)
 
-  <div class="library">
-    <h2>Your Books</h2>
-    <div class="results">
+          let edit = document.createElement('div')
+          edit.className = `edit data-edit-${item}`
+          edit.innerHTML = `<a href="#">Edit</a>`
+          results.appendChild(edit)
 
-    </div>
+        }
+      }
 
-  </div>
+      addBookToLibrary()
+      displayLibraryBooks()
+      updateEntry()
 
-
-  </section>
-  <script>
-  let myLibrary = [ 
-    { 
-      title: "The Definitive Guide to Horse Breeding",
-      author: "Sir King Winsley",
-      numPages: 924,
-      readStatus: false, 
-    },
-
-    {
-      title: "How Is It Possible That People Still Believe in Homeopathy",
-      author: "Dr. Elloit Charmer",
-      numPages: 230,
-      readStatus: false,
-    },
-
-    {
-      title: "From the Moon To Mars, How To Avoid Talking To A Vegan",
-      author: "Dennis McChaplin",
-      numPages: 1322,
-      readStatus: true
-    }
-    
-  ];
-  
-    // write a constructor for making Book objects
-    // object should include title, author, pages, readBook?
-
-function Book(title, author, numPages, readStatus) {
-  this.title = title,
-  this.author = author,
-  this.numPages = numPages,
-  this.readStatus = readStatus
-}
-
-function addBookToLibrary() {
-  let addBook = document.getElementById('addbook').addEventListener('click', function () {
-    let title = document.querySelector('[data-title]').value
-    let author = document.querySelector('[data-author]').value
-    let pages = document.querySelector('[data-pages]').value 
-    let read = false
-    document.querySelector('[data-read]').checked ? read = true : read = false
-    myLibrary.push(new Book(title, author, pages, read));
-    displayLibraryBooks()  
-});    
-};
-
-function displayLibraryBooks() {
-  document.querySelector('.results').innerHTML = "" // clear
-  let results = document.querySelector('.results')
-  for (let item in myLibrary) {
-    let title = document.createElement('div') 
-    title.className = "title"
-    title.innerHTML = `${myLibrary[item]["title"]}`
-    results.appendChild(title)
-    
-    let htmlMessage = '';
-    if (myLibrary[item]["readStatus"]) {
-      htmlMessage = "Finished";
-    } else {
-      htmlMessage = "Not Read Yet";
-    }
-
-    let secondary = document.createElement('div')
-    secondary.className = "secondary"
-    secondary.innerHTML = `by ${myLibrary[item]["author"]}, ${myLibrary[item]["numPages"]} pages (${htmlMessage})`
-    results.appendChild(secondary)
-
-  }
-}
-
-addBookToLibrary()
-displayLibraryBooks()  
-
- 
-  // get data from all fields, add to object, add to myLibrary array
-
-
-// let theHobbit = new Book("The Hobbit", "J.R.R Tolkien", 295, false);
-// myLibrary.push(theHobbit)
-// for (let i = 0; i < myLibrary.length; i++) {
-//   console.log(myLibrary[i].title, myLibrary[i].numPages) 
-// }
-
-
-
-
-
-
-
-
-
-
-
-  </script>
+    </script>
 </body>
+
 </html>
