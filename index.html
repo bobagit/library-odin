@@ -100,79 +100,79 @@
       }
       ];
 
-      // write a constructor for making Book objects
-      // object should include title, author, pages, readBook?
+function Book(title, author, numPages, readStatus) {
+  this.title = title,
+    this.author = author,
+    this.numPages = numPages,
+    this.readStatus = readStatus
+}
 
-      function Book(title, author, numPages, readStatus, id) {
-        this.title = title,
-          this.author = author,
-          this.numPages = numPages,
-          this.readStatus = readStatus
-      }
+let button = document.getElementById('addbook').addEventListener('click', () => {
+  addBookToLibrary()
+  displayLibraryBooks()
+});
 
-      function addBookToLibrary() {
-        let addBook = document.getElementById('addbook').addEventListener('click', function () {
-          let title = document.querySelector('[data-title]').value
-          let author = document.querySelector('[data-author]').value
-          let pages = document.querySelector('[data-pages]').value
-          let read = false
-          document.querySelector('[data-read]').checked ? read = true : read = false
-          myLibrary.push(new Book(title, author, pages, read));
-          displayLibraryBooks()
-        });
-      }
+function addBookToLibrary() {
+    let title = document.querySelector('[data-title]').value
+    let author = document.querySelector('[data-author]').value
+    let pages = document.querySelector('[data-pages]').value
+    let read = false
+    document.querySelector('[data-read]').checked ? read = true : read = false
+    let newBook = new Book(title, author, pages, read) 
+    myLibrary.push(newBook)
+    // clear fields
+    document.querySelector('[data-title]').value = ''
+    document.querySelector('[data-author]').value = ''
+    document.querySelector('[data-pages]').value = ''
+}
 
-      function updateEntry() {
-        let listOfBooks = document.querySelectorAll('.edit')
-        for (let i = 0; i < listOfBooks.length; i++) {
-            listOfBooks[i].addEventListener('click', function () {
-              alert(`Hello ${i}`)
-          
-          })
-        }
-      }
+function displayLibraryBooks() {
+  let results = document.querySelector('.results')
+  results.innerText = ''
+  for (let item in myLibrary) {
+    let title = document.createElement('div')
+    title.className = `title`
+    title.setAttribute('data-id', `${item}`) 
+    title.innerText = `${myLibrary[item]["title"]}`
+    results.appendChild(title)
+
+    let htmlMessage = '';
+    if (myLibrary[item]["readStatus"]) {
+      htmlMessage = "Finished";
+    } else {
+      htmlMessage = "Not Read Yet";
+    }
+
+    let secondary = document.createElement('div')
+    secondary.className = `secondary`
+    secondary.setAttribute('data-id', `${item}`) 
+    secondary.innerText = `by ${myLibrary[item]["author"]}, ${myLibrary[item]["numPages"]} pages (${htmlMessage})`
+    results.appendChild(secondary)
+  
+    let edit = document.createElement('div')
+    edit.className = "edit" 
+    edit.setAttribute('data-id', `${item}`) 
+    edit.innerHTML = `<a href="#">Edit</a>`
+    results.appendChild(edit)
     
-      function clear() {
-        document.querySelector('.results').innerHTML = ""
-        // clear
-        document.querySelector('[data-title]').innerHTML = ""
-        document.querySelector('[data-author]').innerHTML = ""
-        document.querySelector('[data-pages]').innerHTML = ""
-      }
+  }
+  updateTitles()
+}
 
-      function displayLibraryBooks() {
-        clear()
-        let results = document.querySelector('.results')
 
-        for (let item in myLibrary) {
-          let title = document.createElement('div')
-          title.className = `title data-id-${item}`
-          title.innerHTML = `${myLibrary[item]["title"]}`
-          results.appendChild(title)
 
-          let htmlMessage = '';
-          if (myLibrary[item]["readStatus"]) {
-            htmlMessage = "Finished";
-          } else {
-            htmlMessage = "Not Read Yet";
-          }
 
-          let secondary = document.createElement('div')
-          secondary.className = `secondary data-id-${item}`
-          secondary.innerHTML = `by ${myLibrary[item]["author"]}, ${myLibrary[item]["numPages"]} pages (${htmlMessage})`
-          results.appendChild(secondary)
-
-          let edit = document.createElement('div')
-          edit.className = `edit data-edit-${item}`
-          edit.innerHTML = `<a href="#">Edit</a>`
-          results.appendChild(edit)
-
-        }
-      }
-
-      addBookToLibrary()
-      displayLibraryBooks()
-      updateEntry()
+function updateTitles() {
+  let edit = document.querySelectorAll('.edit')
+  for (let i = 0; i < edit.length; i++) {
+    edit[i].addEventListener('click', function () {
+      event.stopPropagation()
+      let newTitle = prompt("Enter New Title Name")
+      myLibrary[i].title = newTitle
+      document.body.querySelector(`.title[data-id="${i}"]`).innerText = newTitle
+  })
+}
+}
 
     </script>
 </body>
