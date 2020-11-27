@@ -86,12 +86,12 @@
         <label>Title</label>
         <input id="edit-title" data-title="edit-title">
         <label>Author</label>
-        <input data-author="edit-author">
+        <input id="edit-author" data-author="edit-author">
         <label>Pages</label>
-        <input data-pages="edit-pages">
+        <input id="edit-pages" data-pages="edit-pages">
         <div class="edit-read-status">
           <label>Finished book?</label>
-          <input class="checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
+          <input class="edit-checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
         </div>
         <button type="button" id="edit-addbook">Save</button>
       </form>
@@ -203,6 +203,20 @@ function editBook() {
       
       let title = document.getElementById('edit-title')
       title.value = myLibrary[i].title
+
+      let author = document.getElementById('edit-author')
+      author.value = myLibrary[i].author
+      
+      let pages = document.getElementById('edit-pages')
+      pages.value = myLibrary[i].numPages
+
+      let readStatus = document.querySelector('.edit-checkbox')
+      if (myLibrary[i].readStatus) {
+        readStatus.checked = true 
+      } else {
+        readStatus.checked = false
+      }
+      
       // let author = document.querySelector('[data-author]').value
       // let pages = document.querySelector('[data-pages]').value
       //let read = false
