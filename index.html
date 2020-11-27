@@ -58,7 +58,7 @@
     </div>
     <section class="content-wrap">
       <div class="add-book">
-        <h2>Add Book</h2>
+        <h2 class="add-book-header">Add Book</h2>
         <p>Add a new book to your library.</p>
         <form>
           <label>Title</label>
@@ -107,10 +107,22 @@ function Book(title, author, numPages, readStatus) {
     this.readStatus = readStatus
 }
 
-let button = document.getElementById('addbook').addEventListener('click', () => {
+let saveNewBookButton = document.getElementById('addbook').addEventListener('click', () => {
   addBookToLibrary()
   displayLibraryBooks()
 });
+
+function clearInputFields() {
+  document.querySelector('[data-title]').value = ''
+  document.querySelector('[data-author]').value = ''
+  document.querySelector('[data-pages]').value = ''
+  document.querySelector('[data-read]').checked = false
+}
+
+function clearResultsDiv() {
+  let results = document.querySelector('.results')
+  results.innerText = ''
+}
 
 function addBookToLibrary() {
     let title = document.querySelector('[data-title]').value
@@ -120,33 +132,32 @@ function addBookToLibrary() {
     document.querySelector('[data-read]').checked ? read = true : read = false
     let newBook = new Book(title, author, pages, read) 
     myLibrary.push(newBook)
-    // clear fields
-    document.querySelector('[data-title]').value = ''
-    document.querySelector('[data-author]').value = ''
-    document.querySelector('[data-pages]').value = ''
+    clearInputFields()    
 }
 
 function displayLibraryBooks() {
+  clearResultsDiv()
   let results = document.querySelector('.results')
-  results.innerText = ''
   for (let item in myLibrary) {
+    // TODO Add items to div, the Title = H3, secondary = text, italic if read, etc
     let title = document.createElement('div')
     title.className = `title`
     title.setAttribute('data-id', `${item}`) 
     title.innerText = `${myLibrary[item]["title"]}`
+    // TODO append to div, then to results
     results.appendChild(title)
 
-    let htmlMessage = '';
+    let isRead = '';
     if (myLibrary[item]["readStatus"]) {
-      htmlMessage = "Finished";
+      isRead = "Finished";
     } else {
-      htmlMessage = "Not Read Yet";
+      isRead = "Not Read Yet";
     }
 
     let secondary = document.createElement('div')
     secondary.className = `secondary`
     secondary.setAttribute('data-id', `${item}`) 
-    secondary.innerText = `by ${myLibrary[item]["author"]}, ${myLibrary[item]["numPages"]} pages (${htmlMessage})`
+    secondary.innerText = `by ${myLibrary[item]["author"]}, ${myLibrary[item]["numPages"]} pages (${isRead})`
     results.appendChild(secondary)
   
     let edit = document.createElement('div')
@@ -156,17 +167,23 @@ function displayLibraryBooks() {
     results.appendChild(edit)
     
   }
-  updateTitles()
+  editBook()
 }
 
 
-
-
-function updateTitles() {
+function editBook() {
   let edit = document.querySelectorAll('.edit')
   for (let i = 0; i < edit.length; i++) {
     edit[i].addEventListener('click', function () {
       event.stopPropagation()
+      // open a model view
+      // populate inputs with form HTML
+      // populate inputs with current data
+      // Allow user to change data
+      // addEventListener to "update button" (also have a cancel button)
+      //   -- close modal view
+      //   -- save new fields to myLibrary
+      //   -- redisplay fields
       let newTitle = prompt("Enter New Title Name")
       myLibrary[i].title = newTitle
       document.body.querySelector(`.title[data-id="${i}"]`).innerText = newTitle
@@ -174,7 +191,7 @@ function updateTitles() {
 }
 }
 
-displayLibraryBooks()
+displayLibraryBooks() // displays library on first load
 
     </script>
 </body>
