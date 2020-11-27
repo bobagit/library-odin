@@ -165,7 +165,7 @@ function displayLibraryBooks() {
   for (let item in myLibrary) {
     // TODO Add items to div, the Title = H3, secondary = text, italic if read, etc
     let title = document.createElement('div')
-    title.className = `title`
+    title.className = "title"
     title.setAttribute('data-id', `${item}`) 
     title.innerText = `${myLibrary[item]["title"]}`
     // TODO append to div, then to results
@@ -179,13 +179,14 @@ function displayLibraryBooks() {
     }
 
     let secondary = document.createElement('div')
-    secondary.className = `secondary`
+    secondary.className = "secondary"
     secondary.setAttribute('data-id', `${item}`) 
     secondary.innerText = `by ${myLibrary[item]["author"]}, ${myLibrary[item]["numPages"]} pages (${isRead})`
     results.appendChild(secondary)
   
     let myModalButton = document.createElement('button')
-    myModalButton.id = "modal-btn"
+    myModalButton.className = "editButton"
+    myModalButton.id = `modal-btn-${item}`
     myModalButton.innerHTML = "Edit"
     results.append(myModalButton)
   }
@@ -194,7 +195,7 @@ function displayLibraryBooks() {
 
 
 function editBook() {
-  let edit = document.querySelectorAll('#modal-btn')
+  let edit = document.querySelectorAll('.editButton')
   for (let i = 0; i < edit.length; i++) {
     edit[i].addEventListener('click', function () {
       event.stopPropagation()
@@ -203,30 +204,21 @@ function editBook() {
       modal.style.display = "block"
       
       // populate fields from existing library book
-      let title = document.getElementById('edit-title')
-      title.value = myLibrary[i].title
+      let editTitle = document.getElementById('edit-title')
+      editTitle.value = myLibrary[i].title
 
-      let author = document.getElementById('edit-author')
-      author.value = myLibrary[i].author
+      let editAuthor = document.getElementById('edit-author')
+      editAuthor.value = myLibrary[i].author
       
-      let pages = document.getElementById('edit-pages')
-      pages.value = myLibrary[i].numPages
+      let editPages = document.getElementById('edit-pages')
+      editPages.value = myLibrary[i].numPages
 
-      let readStatus = document.querySelector('.edit-checkbox')
+      let editReadStatus = document.querySelector('.edit-checkbox')
       if (myLibrary[i].readStatus) {
-        readStatus.checked = true 
+        editReadStatus.checked = true 
       } else {
-        readStatus.checked = false
+        editReadStatus.checked = false
       }
-      
-      let editSave = document.getElementById('edit-addbook').addEventListener('click', () => {
-        myLibrary[i].title = title.value
-        myLibrary[i].author = author.value
-        myLibrary[i].numPages = pages.value
-        myLibrary[i].readStatus = readStatus.checked
-        modal.style.display = "none"
-        displayLibraryBooks()
-      })
           
       let closeBtn = document.querySelector(".close-btn")
       closeBtn.onclick = function () {
@@ -238,8 +230,21 @@ function editBook() {
           modal.style.display = "none"
         }
       }
-  })
-}
+      
+        let editSave = document.getElementById('edit-addbook').addEventListener('click', function() {
+        event.stopPropagation()
+        
+        myLibrary[i].title = editTitle.value
+        myLibrary[i].author = editAuthor.value
+        myLibrary[i].numPages = editPages.value
+        myLibrary[i].readStatus = editReadStatus.checked
+        modal.style.display = "none"
+        
+        displayLibraryBooks()
+
+      })
+    })
+  }
 }
 
 displayLibraryBooks() // displays library on first load
