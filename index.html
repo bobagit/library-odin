@@ -158,6 +158,7 @@ function addBookToLibrary() {
     clearInputFields()    
 }
 
+
 function displayLibraryBooks() {
   clearResultsDiv()
   let results = document.querySelector('.results')
@@ -201,6 +202,7 @@ function editBook() {
       let modal = document.querySelector(".modal")
       modal.style.display = "block"
       
+      // populate fields from existing library book
       let title = document.getElementById('edit-title')
       title.value = myLibrary[i].title
 
@@ -217,44 +219,32 @@ function editBook() {
         readStatus.checked = false
       }
       
-      // let author = document.querySelector('[data-author]').value
-      // let pages = document.querySelector('[data-pages]').value
-      //let read = false
-      // document.querySelector('[data-read]').checked ? read = true : read = false
-    
+      let editSave = document.getElementById('edit-addbook').addEventListener('click', () => {
+        myLibrary[i].title = title.value
+        myLibrary[i].author = author.value
+        myLibrary[i].numPages = pages.value
+        myLibrary[i].readStatus = readStatus.checked
+        modal.style.display = "none"
+        displayLibraryBooks()
+      })
+          
       let closeBtn = document.querySelector(".close-btn")
       closeBtn.onclick = function () {
         modal.style.display = "none"
       }
+      // click outside model to close
       window.onclick = function (e) {
         if (e.target == modal) {
           modal.style.display = "none"
         }
       }
-      // populate inputs with form HTML
-      // populate inputs with current data
-      // Allow user to change data
-      // addEventListener to "update button" (also have a cancel button)
-      //   -- close modal view
-      //   -- save new fields to myLibrary
-      //   -- redisplay fields
-      //let newTitle = prompt("Enter New Title Name")
-      //myLibrary[i].title = newTitle
-      //document.body.querySelector(`.title[data-id="${i}"]`).innerText = newTitle
   })
 }
 }
 
-
 displayLibraryBooks() // displays library on first load
 
-
-      
-
-
-
-
-    </script>
+</script>
 </body>
 
 </html>
