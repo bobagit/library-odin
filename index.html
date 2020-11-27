@@ -78,6 +78,25 @@
         <h2>Your Library</h2>
         <div class="results"></div>
       </div>
+<div class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+      <h2 class="add-book-header">Edit Book</h2>
+      <form>
+        <label>Title</label>
+        <input id="edit-title" data-title="edit-title">
+        <label>Author</label>
+        <input data-author="edit-author">
+        <label>Pages</label>
+        <input data-pages="edit-pages">
+        <div class="edit-read-status">
+          <label>Finished book?</label>
+          <input class="checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
+        </div>
+        <button type="button" id="edit-addbook">Save</button>
+      </form>
+  </div>
+</div>
 
 
     </section>
@@ -164,23 +183,40 @@ function displayLibraryBooks() {
     secondary.innerText = `by ${myLibrary[item]["author"]}, ${myLibrary[item]["numPages"]} pages (${isRead})`
     results.appendChild(secondary)
   
-    let edit = document.createElement('div')
-    edit.className = "edit" 
-    edit.setAttribute('data-id', `${item}`) 
-    edit.innerHTML = `<a href="#">Edit</a>`
-    results.appendChild(edit)
-    
+    let myModalButton = document.createElement('button')
+    myModalButton.id = "modal-btn"
+    myModalButton.innerHTML = "Edit"
+    results.append(myModalButton)
   }
   editBook()
 }
 
 
 function editBook() {
-  let edit = document.querySelectorAll('.edit')
+  let edit = document.querySelectorAll('#modal-btn')
   for (let i = 0; i < edit.length; i++) {
     edit[i].addEventListener('click', function () {
       event.stopPropagation()
-      // open a model view
+      // open a modal view
+      let modal = document.querySelector(".modal")
+      modal.style.display = "block"
+      
+      let title = document.getElementById('edit-title')
+      title.value = myLibrary[i].title
+      // let author = document.querySelector('[data-author]').value
+      // let pages = document.querySelector('[data-pages]').value
+      //let read = false
+      // document.querySelector('[data-read]').checked ? read = true : read = false
+    
+      let closeBtn = document.querySelector(".close-btn")
+      closeBtn.onclick = function () {
+        modal.style.display = "none"
+      }
+      window.onclick = function (e) {
+        if (e.target == modal) {
+          modal.style.display = "none"
+        }
+      }
       // populate inputs with form HTML
       // populate inputs with current data
       // Allow user to change data
@@ -188,33 +224,21 @@ function editBook() {
       //   -- close modal view
       //   -- save new fields to myLibrary
       //   -- redisplay fields
-      let newTitle = prompt("Enter New Title Name")
-      myLibrary[i].title = newTitle
-      document.body.querySelector(`.title[data-id="${i}"]`).innerText = newTitle
+      //let newTitle = prompt("Enter New Title Name")
+      //myLibrary[i].title = newTitle
+      //document.body.querySelector(`.title[data-id="${i}"]`).innerText = newTitle
   })
 }
 }
 
-let modalBtn = document.getElementById("modal-btn")
-let modal = document.querySelector(".modal")
-let closeBtn = document.querySelector(".close-btn")
-
-modalBtn.onclick = function() {
-  modal.style.display = "block"
-}
-
-closeBtn.onclick = function() {
-  modal.style.display = "none"
-}
-
-window.onclick = function(e) {
-  if(e.target == modal) {
-    modal.style.display = "none"
-  }
-}
-
 
 displayLibraryBooks() // displays library on first load
+
+
+      
+
+
+
 
     </script>
 </body>
