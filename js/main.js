@@ -6,15 +6,28 @@ const modalSaveButton = document.getElementById('modal-save-button')
 const modalDeleteButton = document.getElementById('modal-delete-button')
 
 let myLibrary = [{
-        id: 1606253782720,
-        title: "The Definitive Guide",
+        id: 1606253742720,
+        title: "0000000",
         author: "Sir King Winsley",
         pages: 924,
         readStatus: true,
       },
       {
-        id: 1606253732520,
-        title: "How Is It Possible",
+        id: 1606251732520,
+        title: "1111111",
+        author: "Dr. Elloit Charmer",
+        pages: 230,
+        readStatus: false,
+      }, {
+        id: 1606353782720,
+        title: "2222222",
+        author: "Sir King Winsley",
+        pages: 924,
+        readStatus: true,
+      },
+      {
+        id: 1606053732520,
+        title: "3333333",
         author: "Dr. Elloit Charmer",
         pages: 230,
         readStatus: false,
@@ -188,10 +201,12 @@ results.addEventListener('click', function(e) {
       let getId = e.target.getAttribute('data-id');
       // find index in myLibrary of target book
       let index = myLibrary.findIndex(x => x.id == getId)
+      
       myLibrary.splice(index, 1)
       modal.style.display = 'none';
       results.querySelectorAll('.bookEntry').forEach(e => e.remove());
       renderBook();
+      e.stopImmediatePropagation()
     });
    };
 })
