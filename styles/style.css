@@ -287,18 +287,52 @@ body {
 }
 
 #page .content-wrap .library {
-  width: 50%;
+  width: 84%;
 }
 
-#page .content-wrap .library .results .secondary {
-  padding: 0.3rem 0 0;
-  font-size: 0.95rem;
-  color: #888;
-  font-style: italic;
-  font-weight: 100;
+#page .content-wrap .library #results .bookEntry {
+  -webkit-box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15);
+          box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15);
+  border: 1px solid #c1c1c1;
+  border-radius: 0px;
+  padding: 1rem;
+  margin: 1.5rem 1.5rem 1.5rem 0;
 }
 
-#page .content-wrap .library .results button {
+#page .content-wrap .library #results .bookEntry .book-del-btn {
+  float: right;
+}
+
+#page .content-wrap .library #results .bookEntry .title-info {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+#page .content-wrap .library #results .bookEntry .author-info {
+  font-size: 1rem;
+  margin: 0.3rem 0 0.8rem;
+  font-style: oblique;
+}
+
+#page .content-wrap .library #results .bookEntry .pages-info {
+  margin: 0 0 0.8rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+#page .content-wrap .library #results .bookEntry .read-status {
+  margin: 0;
+}
+
+#page .content-wrap .library #results .bookEntry .edit-btn {
+  margin: 0;
+}
+
+#page .content-wrap .library #results .shaded {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+#page .content-wrap .library #results button {
   margin: 0.5rem 0 2rem;
   padding: 0.3rem 0.6rem;
   text-transform: uppercase;

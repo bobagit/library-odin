@@ -8,7 +8,7 @@ body
   font-family: $font
 
 @mixin box-shadow-both
-  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15)
 
 
 
@@ -184,15 +184,36 @@ body
           margin: 0.5rem 0 0
 
     .library
-      width: 50%
-      .results
-        .title
-        .secondary
-          padding: 0.3rem 0 0
-          font-size: 0.95rem
-          color: #888
-          font-style: italic
-          font-weight: 100
+      width: 84%
+      #results
+        .bookEntry
+          @include box-shadow-both
+          border: 1px solid #c1c1c1
+          border-radius: 0px
+          padding: 1rem
+          margin: 1.5rem 1.5rem 1.5rem 0   
+          .book-del-btn
+            float: right
+          .title-info
+            font-size: 1.2rem
+            margin: 0
+          .author-info
+            font-size: 1rem
+            margin: 0.3rem 0 0.8rem 
+            font-style: oblique
+          .pages-info
+            margin: 0 0 0.8rem
+            font-size: 0.9rem
+            text-transform: uppercase
+          .read-status
+            margin: 0 
+          .edit-btn
+            margin: 0
+        .shaded
+          background-color: rgba(0, 0, 0, 0.04)
+
+      
+
         button
           margin: 0.5rem 0 2rem
           padding: 0.3rem 0.6rem
@@ -280,7 +301,7 @@ body
       justify-content: space-between
       background-color: $blue
       width: 100%
-      box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2)
       
       .global-nav
         display: flex

@@ -60,196 +60,50 @@
       <div class="add-book">
         <h2 class="add-book-header">Add Book</h2>
         <p>Add a new book to your library.</p>
-        <form>
+        <form id="add-form">
           <label>Title</label>
-          <input id="title" data-title="title">
+          <input id="title-name">
           <label>Author</label>
-          <input data-author="author">
+          <input id="author-name">
           <label>Pages</label>
-          <input data-pages="pages">
+          <input id="page-num">
           <div class="read-status">
             <label>Finished book?</label>
-            <input class="checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
+            <input type="checkbox" id="readStatusBox">
           </div>
-          <button type="button" id="addbook">Save</button>
+          <button type="submit" class="new-book-btn" form="add-form">Save</button>
         </form>
       </div>
       <div class="library">
         <h2>Your Library</h2>
-        <div class="results"></div>
+        <div id="results">
+          
+        </div>
       </div>
+
+  
 <div class="modal">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
       <h2 class="add-book-header">Edit Book</h2>
-      <form>
+      <form id="modalForm">
         <label>Title</label>
-        <input id="edit-title" data-title="edit-title">
+        <input id="modal-title" data-title="modal-title">
         <label>Author</label>
-        <input id="edit-author" data-author="edit-author">
+        <input id="modal-author" data-author="modal-author">
         <label>Pages</label>
-        <input id="edit-pages" data-pages="edit-pages">
-        <div class="edit-read-status">
+        <input id="modal-pages" data-pages="modal-pages">
+        <div class="modal-read-status">
           <label>Finished book?</label>
-          <input class="edit-checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
+          <input class="modal-checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
         </div>
-        <button type="button" id="edit-addbook">Save</button>
+        <button type="submit" id="modal-save-button" class="modal-save-button" form="modalForm">Save</button>
       </form>
   </div>
 </div>
+</section>
 
-
-    </section>
-
-
-    <script>
-      let myLibrary = [{
-        title: "The Definitive Guide to Horse Breeding",
-        author: "Sir King Winsley",
-        numPages: 924,
-        readStatus: false,
-      },
-      {
-        title: "How Is It Possible That People Still Believe in Homeopathy",
-        author: "Dr. Elloit Charmer",
-        numPages: 230,
-        readStatus: false,
-      },
-      {
-        title: "From the Moon To Mars, How To Avoid Talking To A Vegan",
-        author: "Dennis McChaplin",
-        numPages: 1322,
-        readStatus: true
-      }
-      ];
-
-function Book(title, author, numPages, readStatus) {
-  this.title = title,
-    this.author = author,
-    this.numPages = numPages,
-    this.readStatus = readStatus
-}
-
-let saveNewBookButton = document.getElementById('addbook').addEventListener('click', () => {
-  addBookToLibrary()
-  displayLibraryBooks()
-});
-
-function clearInputFields() {
-  document.querySelector('[data-title]').value = ''
-  document.querySelector('[data-author]').value = ''
-  document.querySelector('[data-pages]').value = ''
-  document.querySelector('[data-read]').checked = false
-}
-
-function clearResultsDiv() {
-  let results = document.querySelector('.results')
-  results.innerText = ''
-}
-
-function addBookToLibrary() {
-    let title = document.querySelector('[data-title]').value
-    let author = document.querySelector('[data-author]').value
-    let pages = document.querySelector('[data-pages]').value
-    let read = false
-    document.querySelector('[data-read]').checked ? read = true : read = false
-    let newBook = new Book(title, author, pages, read) 
-    myLibrary.push(newBook)
-    clearInputFields()    
-}
-
-
-function displayLibraryBooks() {
-  clearResultsDiv()
-  let results = document.querySelector('.results')
-  for (let item in myLibrary) {
-    // TODO Add items to div, the Title = H3, secondary = text, italic if read, etc
-    let title = document.createElement('div')
-    title.className = "title"
-    title.setAttribute('data-id', `${item}`) 
-    title.innerText = `${myLibrary[item]["title"]}`
-    // TODO append to div, then to results
-    results.appendChild(title)
-
-    let isRead = '';
-    if (myLibrary[item]["readStatus"]) {
-      isRead = "Finished";
-    } else {
-      isRead = "Not Read Yet";
-    }
-
-    let secondary = document.createElement('div')
-    secondary.className = "secondary"
-    secondary.setAttribute('data-id', `${item}`) 
-    secondary.innerText = `by ${myLibrary[item]["author"]}, ${myLibrary[item]["numPages"]} pages (${isRead})`
-    results.appendChild(secondary)
-  
-    let myModalButton = document.createElement('button')
-    myModalButton.className = "editButton"
-    myModalButton.id = `modal-btn-${item}`
-    myModalButton.innerHTML = "Edit"
-    results.append(myModalButton)
-  }
-  editBook()
-}
-
-
-function editBook() {
-  let edit = document.querySelectorAll('.editButton')
-  for (let i = 0; i < edit.length; i++) {
-    edit[i].addEventListener('click', function () {
-      event.stopPropagation()
-      // open a modal view
-      let modal = document.querySelector(".modal")
-      modal.style.display = "block"
-      
-      // populate fields from existing library book
-      let editTitle = document.getElementById('edit-title')
-      editTitle.value = myLibrary[i].title
-
-      let editAuthor = document.getElementById('edit-author')
-      editAuthor.value = myLibrary[i].author
-      
-      let editPages = document.getElementById('edit-pages')
-      editPages.value = myLibrary[i].numPages
-
-      let editReadStatus = document.querySelector('.edit-checkbox')
-      if (myLibrary[i].readStatus) {
-        editReadStatus.checked = true 
-      } else {
-        editReadStatus.checked = false
-      }
-          
-      let closeBtn = document.querySelector(".close-btn")
-      closeBtn.onclick = function () {
-        modal.style.display = "none"
-      }
-      // click outside model to close
-      window.onclick = function (e) {
-        if (e.target == modal) {
-          modal.style.display = "none"
-        }
-      }
-      
-        let editSave = document.getElementById('edit-addbook').addEventListener('click', function() {
-        event.stopPropagation()
-        
-        myLibrary[i].title = editTitle.value
-        myLibrary[i].author = editAuthor.value
-        myLibrary[i].numPages = editPages.value
-        myLibrary[i].readStatus = editReadStatus.checked
-        modal.style.display = "none"
-        
-        displayLibraryBooks()
-
-      })
-    })
-  }
-}
-
-displayLibraryBooks() // displays library on first load
-
-</script>
+<script src="js/main.js"></script>
 </body>
 
 </html>
