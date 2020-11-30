@@ -4,7 +4,7 @@ let cancelBtn = document.querySelector('.cancel-btn')
 const results = document.getElementById('results') 
 let formAddNewBook = document.getElementById('add-form')
 let isBookCompleted = document.getElementById('readStatusBox')
-const modalForm = document.getElementById('modalForm')
+const modalSaveButton = document.getElementById('modal-save-button')
 
 let myLibrary = [{
         id: 1606253782720,
@@ -120,63 +120,72 @@ formAddNewBook.addEventListener('submit', function(e) {
 
 
 results.addEventListener('click', function(e) {
-  e.stopPropagation()
+  e.preventDefault();
   // LEARNED e.target.classList.contains
   let getId = e.target.getAttribute('data-id');
   if (e.target.classList.contains('edit-btn')) {
-    for (let i = 0; i < myLibrary.length; i++) {
-      if (myLibrary[i].id == getId) {
-        // fire modal
-        let modal = document.querySelector('.modal');
-        modal.style.display = 'block';
-        
-        // populate fields with found fields
-        let modalTitle = document.getElementById('modal-title');
-        modalTitle.value = myLibrary[i].title;
+    // finds object based on ID
+    let bookBeingEdited = myLibrary.find(x=> x.id == getId)
 
-        let modalAuthor = document.getElementById('modal-author');
-        modalAuthor.value = myLibrary[i].author;
+    let modal = document.querySelector('.modal');
+    modal.style.display = 'block';
 
-        let modalPages = document.getElementById('modal-pages');
-        modalPages.value = myLibrary[i].pages;
+    // populate fields with found fields
+    let modalTitle = document.getElementById('modal-title');
+    modalTitle.value = bookBeingEdited.title
 
-        let modalReadStatus = document.querySelector('.modal-checkbox')
-        if (myLibrary[i].readStatus) {
-          modalReadStatus.checked = true;
-        } else {
-          modalReadStatus.checked = false;
-        }
+    let modalAuthor = document.getElementById('modal-author');
+    modalAuthor.value = bookBeingEdited.author;
 
-        let closeBtn = document.querySelector('.close-btn');
-        closeBtn.addEventListener('click', (e) => {
-          modal.style.display = 'none';
-        });
-
-        window.onclick = function(e) {
-          if (e.target == modal) {
-            modal.style.display = 'none';
-          };
-        };
-
-        modalForm.addEventListener('click', e => {
-          e.preventDefault()
-          if (e.target.classList.contains('modal-save-button')) {
-            myLibrary[i].title = modalTitle.value
-            myLibrary[i].author = modalAuthor.value
-            myLibrary[i].pages = modalPages.value
-            myLibrary[i].readStatus = modalReadStatus.value
-            console.log(myLibrary)
-            modal.style.display = 'none';
-            results.querySelectorAll('.bookEntry').forEach(e => e.remove());
-            renderBook();
-            e.stopImmediatePropagation()
-            }
-         });
-        break
-        } 
-     } 
+    let modalPages = document.getElementById('modal-pages');
+    modalPages.value = bookBeingEdited.pages;
+  
+    let modalReadStatus = document.querySelector('.modal-checkbox')
+    if (bookBeingEdited.readStatus) {
+      modalReadStatus.checked = true;
+    } else {
+      modalReadStatus.checked = false;
     }
- })
+    let modalSaveButton = document.querySelector('.modal-save-button')
+    modalSaveButton.setAttribute('data-id', getId);
+
+    modalSaveButton.addEventListener('click', e => {
+      e.preventDefault();
+      let getId = e.target.getAttribute('data-id');
+      let index = myLibrary.findIndex(x => x.id == getId)
+      myLibrary[index].title = modalTitle.value
+      myLibrary[index].author = modalAuthor.value
+      myLibrary[index].pages = modalPages.value
+      myLibrary[index].readStatus = modalReadStatus.value
+      console.log(myLibrary)
+      modal.style.display = 'none';
+      results.querySelectorAll('.bookEntry').forEach(e => e.remove());
+      renderBook();
+    });
+   };
+})
+
+
+
+
+    // for (let i = 0; i < myLibrary.length; i++) {
+    //   if (myLibrary[i].id == getId) {
+    //     // fire modal
+        
+
+
+
+        // let closeBtn = document.querySelector('.close-btn');
+        // closeBtn.addEventListener('click', (e) => {
+        //   modal.style.display = 'none';
+        // });
+
+        // window.onclick = function(e) {
+        //   if (e.target == modal) {
+        //     modal.style.display = 'none';
+        //   };
+        // };
+
 
 
 
