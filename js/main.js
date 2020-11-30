@@ -80,7 +80,7 @@ function renderBook() {
     bookEntry.appendChild(tools)
 
     let editLibraryBookButton = document.createElement('img');
-    editLibraryBookButton.setAttribute('src', '/images/icon-edit.png')
+    editLibraryBookButton.setAttribute('src', 'images/icon-edit.png')
     editLibraryBookButton.classList.add('edit-btn');
     editLibraryBookButton.setAttribute('data-id', Book.id);
     tools.appendChild(editLibraryBookButton);
