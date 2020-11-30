@@ -88,16 +88,17 @@
       <h2 class="add-book-header">Edit Book</h2>
       <form id="modalForm">
         <label>Title</label>
-        <input id="modal-title" data-title="modal-title">
+        <input id="modal-title" data-title="modal-title" onClick="this.select()">
         <label>Author</label>
-        <input id="modal-author" data-author="modal-author">
+        <input id="modal-author" data-author="modal-author" onClick="this.select()">
         <label>Pages</label>
-        <input id="modal-pages" data-pages="modal-pages">
+        <input id="modal-pages" data-pages="modal-pages" onClick="this.select()">
         <div class="modal-read-status">
           <label>Finished book?</label>
           <input class="modal-checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
         </div>
         <button type="submit" id="modal-save-button" class="modal-save-button" form="modalForm">Save</button>
+        <button type="submit" id="modal-delete-button" class="modal-delete-button" form="modalForm">Delete</button>
       </form>
   </div>
 </div>

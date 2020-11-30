@@ -291,6 +291,12 @@ body {
 }
 
 #page .content-wrap .library #results .bookEntry {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15);
           box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15);
   border: 1px solid #c1c1c1;
@@ -299,32 +305,79 @@ body {
   margin: 1.5rem 1.5rem 1.5rem 0;
 }
 
-#page .content-wrap .library #results .bookEntry .book-del-btn {
-  float: right;
+#page .content-wrap .library #results .bookEntry .tools {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 60px;
+  height: 17px;
 }
 
-#page .content-wrap .library #results .bookEntry .title-info {
+#page .content-wrap .library #results .bookEntry .tools img {
+  max-width: 14px;
+  margin-top: 3px;
+  padding: 0.5rem;
+}
+
+#page .content-wrap .library #results .bookEntry .tools img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+#page .content-wrap .library #results .bookEntry .tools span {
+  height: 14px;
+  width: 14px;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+#page .content-wrap .library #results .bookEntry .tools span:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+#page .content-wrap .library #results .bookEntry .book-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#page .content-wrap .library #results .bookEntry .book-details .title-info {
   font-size: 1.2rem;
   margin: 0;
 }
 
-#page .content-wrap .library #results .bookEntry .author-info {
+#page .content-wrap .library #results .bookEntry .book-details .author-info {
   font-size: 1rem;
   margin: 0.3rem 0 0.8rem;
   font-style: oblique;
 }
 
-#page .content-wrap .library #results .bookEntry .pages-info {
+#page .content-wrap .library #results .bookEntry .book-details .pages-info {
   margin: 0 0 0.8rem;
   font-size: 0.9rem;
   text-transform: uppercase;
 }
 
-#page .content-wrap .library #results .bookEntry .read-status {
+#page .content-wrap .library #results .bookEntry .book-details .read-status {
   margin: 0;
 }
 
-#page .content-wrap .library #results .bookEntry .edit-btn {
+#page .content-wrap .library #results .bookEntry .book-details .edit-btn {
   margin: 0;
 }
 
@@ -391,6 +444,10 @@ body {
   width: 30%;
   padding: 0.5rem;
   margin: 0.5rem 0 0;
+}
+
+#page .content-wrap .modal .modal-content form button.modal-delete-button {
+  background-color: red;
 }
 
 #page .content-wrap .modal .modal-content .close-btn {

@@ -1,10 +1,9 @@
 // LEARNED assign selectors at top. Organize.
-let newBookBtn = document.querySelector('.new-book-btn')
-let cancelBtn = document.querySelector('.cancel-btn')
 const results = document.getElementById('results') 
-let formAddNewBook = document.getElementById('add-form')
-let isBookCompleted = document.getElementById('readStatusBox')
+const formAddNewBook = document.getElementById('add-form')
+const isBookCompleted = document.getElementById('readStatusBox')
 const modalSaveButton = document.getElementById('modal-save-button')
+const modalDeleteButton = document.getElementById('modal-delete-button')
 
 let myLibrary = [{
         id: 1606253782720,
@@ -35,58 +34,64 @@ function Book(id, title, author, pages, readStatus) {
 function renderBook() {
   myLibrary.forEach(Book => {
     let bookEntry = document.createElement('div');
-      bookEntry.classList.add('bookEntry');
-      bookEntry.setAttribute('data-id', Book.id);
-      results.appendChild(bookEntry);
+    bookEntry.classList.add('bookEntry');
+    bookEntry.setAttribute('data-id', Book.id);
+    results.appendChild(bookEntry);
 
-    let bookDelete = document.createElement('span');
-      bookDelete.classList.add('book-del-btn');
-      bookDelete.textContent = '×';
-      bookDelete.setAttribute('data-id', Book.id);
-      bookEntry.appendChild(bookDelete);
+    let bookDetails = document.createElement('div');
+    bookDetails.classList.add('book-details')
+    bookEntry.appendChild(bookDetails)
 
     let titleInfo = document.createElement('h2');
-      titleInfo.classList.add('title-info');
-      titleInfo.textContent = Book.title;
-      bookEntry.appendChild(titleInfo);
+    titleInfo.classList.add('title-info');
+    titleInfo.textContent = Book.title;
+    bookDetails.appendChild(titleInfo);
     
     let authorInfo = document.createElement('p');
-      authorInfo.classList.add('author-info');
-      authorInfo.textContent = ' by ' + Book.author;
-      bookEntry.appendChild(authorInfo);
+    authorInfo.classList.add('author-info');
+    authorInfo.textContent = ' by ' + Book.author;
+    bookDetails.appendChild(authorInfo);
     
     let pagesInfo = document.createElement('p')
-      pagesInfo.classList.add('pages-info');
-      pagesInfo.textContent = Book.pages + ' pages';
-      bookEntry.appendChild(pagesInfo);
-
-    let editLibraryBookButton = document.createElement('button');
-    editLibraryBookButton.classList.add('edit-btn');
-    editLibraryBookButton.setAttribute('data-id', Book.id);
-    editLibraryBookButton.textContent = 'Edit';
-    bookEntry.appendChild(editLibraryBookButton);
+    pagesInfo.classList.add('pages-info');
+    pagesInfo.textContent = Book.pages + ' pages';
+    bookDetails.appendChild(pagesInfo);
     
     let readStatus = document.createElement('p');
-      readStatus.classList.add('read-status');
-      bookEntry.appendChild(readStatus);
-      readStatus.setAttribute('data-id', Book.id);
+    readStatus.classList.add('read-status');
+    bookDetails.appendChild(readStatus);
+    readStatus.setAttribute('data-id', Book.id);
 
-      bookCompleted = () => {
-        readStatus.textContent = 'Completed';
-      };
+    bookCompleted = () => {
+      readStatus.textContent = 'Completed';
+    };
 
-      bookNotRead = () => {
-        readStatus.textContent = 'Not Read Yet';
-      };
+    bookNotRead = () => {
+      readStatus.textContent = 'Not Read Yet';
+    };
 
-      if (Book.readStatus == true) {
-        bookCompleted();
-      } else {
-        bookNotRead();
-      };
+    if (Book.readStatus == true) {
+      bookCompleted();
+    } else {
+      bookNotRead();
+    };
+    let tools = document.createElement('div');
+    tools.classList.add('tools')
+    bookEntry.appendChild(tools)
 
-    });
-  };
+    let editLibraryBookButton = document.createElement('img');
+    editLibraryBookButton.setAttribute('src', '/images/icon-edit.png')
+    editLibraryBookButton.classList.add('edit-btn');
+    editLibraryBookButton.setAttribute('data-id', Book.id);
+    tools.appendChild(editLibraryBookButton);
+    
+    let bookDelete = document.createElement('span');
+    bookDelete.classList.add('book-del-btn');
+    bookDelete.textContent = 'X';
+    bookDelete.setAttribute('data-id', Book.id);
+    tools.appendChild(bookDelete);    
+  });
+};
 
 renderBook();
 
@@ -97,7 +102,7 @@ addBook = () => {
   this.id = Date.now();
   this.title = document.getElementById('title-name').value;
   this.author = document.getElementById('author-name').value;
-  this.pages = document.getElementById('page-num').value;
+  this.pages = parseInt(document.getElementById('page-num').value);
   this.readStatus = (isBookCompleted.checked == true) ? true : false;
   // Add new object to Library
   let addNewBook = new Book(id, title, author, pages, readStatus);
@@ -149,43 +154,44 @@ results.addEventListener('click', function(e) {
     let modalSaveButton = document.querySelector('.modal-save-button')
     modalSaveButton.setAttribute('data-id', getId);
 
+    let modalDeleteButton = document.querySelector('.modal-delete-button')
+    modalDeleteButton.setAttribute('data-id', getId);
+
+    let closeBtn = document.querySelector('.close-btn');
+    closeBtn.addEventListener('click', e => {
+      modal.style.display = 'none';
+    });
+
+    window.onclick = (e) => {
+      if (e.target == modal) {
+        modal.style.display = 'none';
+      };
+    };
+
     modalSaveButton.addEventListener('click', e => {
       e.preventDefault();
       let getId = e.target.getAttribute('data-id');
+      // find index in myLibrary of target book
       let index = myLibrary.findIndex(x => x.id == getId)
       myLibrary[index].title = modalTitle.value
       myLibrary[index].author = modalAuthor.value
-      myLibrary[index].pages = modalPages.value
-      myLibrary[index].readStatus = modalReadStatus.value
+      myLibrary[index].pages = parseInt(modalPages.value)
+      myLibrary[index].readStatus = modalReadStatus.checked
       console.log(myLibrary)
+      modal.style.display = 'none';
+      results.querySelectorAll('.bookEntry').forEach(e => e.remove());
+      renderBook();
+    });
+
+    modalDeleteButton.addEventListener('click', e => {
+      e.preventDefault();
+      let getId = e.target.getAttribute('data-id');
+      // find index in myLibrary of target book
+      let index = myLibrary.findIndex(x => x.id == getId)
+      myLibrary.splice(index, 1)
       modal.style.display = 'none';
       results.querySelectorAll('.bookEntry').forEach(e => e.remove());
       renderBook();
     });
    };
 })
-
-
-
-
-    // for (let i = 0; i < myLibrary.length; i++) {
-    //   if (myLibrary[i].id == getId) {
-    //     // fire modal
-        
-
-
-
-        // let closeBtn = document.querySelector('.close-btn');
-        // closeBtn.addEventListener('click', (e) => {
-        //   modal.style.display = 'none';
-        // });
-
-        // window.onclick = function(e) {
-        //   if (e.target == modal) {
-        //     modal.style.display = 'none';
-        //   };
-        // };
-
-
-
-
