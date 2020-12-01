@@ -1,6 +1,6 @@
 # Odin Project - Library / Book Project
 
-I used the [Berkeley Public Library's website](https://www.berkeleypubliclibrary.org/) for the design. I wrote out the code for this project and nearly finished it, but ran into looping bugs near the end. I decided to completely rewrite it after some study.
+I used the Berkeley Public Library's [website](https://www.berkeleypubliclibrary.org/) for the design. I wrote out the code for this project and nearly finished it, but ran into looping bugs near the end. I decided to completely rewrite it after some study.
 
 I started reading David Flanagan's (*JavaScript: The Definitive Guide, 7th Edition*)[https://learning.oreilly.com/library/view/javascript-the-definitive/9781491952016/], focusing on chapter 15 that covers events and propagation. I also reviewed [MDN's Introduction to Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events). After three days of struggling with the same looping bugs, I finally decided it would be worth it to review submitted Odin project code. I made a point to really study the code and look up everything I didn't understand, and not just paste in segments. In particular, [Gkuzin13](https://github.com/Gkuzin13/book-library) was the project that made most sense to me, and is ultimately what got me over the hump — thank you!
 
