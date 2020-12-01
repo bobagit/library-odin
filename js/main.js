@@ -4,7 +4,7 @@ const isBookCompleted = document.getElementById('readStatusBox')
 const modalSaveButton = document.getElementById('modal-save-button')
 const modalDeleteButton = document.getElementById('modal-delete-button')
 
-
+// Local Storage Check Availability Function
 function storageAvailable(type) {
   var storage;
   try {
@@ -243,6 +243,17 @@ results.addEventListener('click', function(e) {
    
 })
 
+// get Elements
+const preObject = document.getElementById('object');
+
+// create references
+const dbRefObject = firebase.database().ref().child('object');
+
+// Sync object changes
+// value syncs entire thing
+// callback 
+// data "snap"shot, returns more than just value
+dbRefObject.on('value', snap => console.log(snap.val()));
 
 
 // TODO
