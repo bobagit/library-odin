@@ -1,4 +1,3 @@
-// LEARNED assign selectors at top. Organize.
 const results = document.getElementById('results') 
 const formAddNewBook = document.getElementById('add-form')
 const isBookCompleted = document.getElementById('readStatusBox')
@@ -7,29 +6,22 @@ const modalDeleteButton = document.getElementById('modal-delete-button')
 
 let myLibrary = [{
         id: 1606253742720,
-        title: "0000000",
+        title: "The Definitive Guide to Red Meat",
         author: "Sir King Winsley",
-        pages: 924,
+        pages: 1,
         readStatus: true,
       },
       {
         id: 1606251732520,
-        title: "1111111",
+        title: "Home Decor 101",
         author: "Dr. Elloit Charmer",
         pages: 230,
         readStatus: false,
       }, {
         id: 1606353782720,
-        title: "2222222",
-        author: "Sir King Winsley",
-        pages: 924,
-        readStatus: true,
-      },
-      {
-        id: 1606053732520,
-        title: "3333333",
-        author: "Dr. Elloit Charmer",
-        pages: 230,
+        title: "How To Raise A Vegan",
+        author: "Karolin Hurtnowski",
+        pages: 1321,
         readStatus: false,
       }
       ];
@@ -42,8 +34,6 @@ function Book(id, title, author, pages, readStatus) {
     this.readStatus = readStatus
 }
 
-// LEARNED using forEach, then dynamically setting properpties to 
-// multiple values by the Book => { .... Book } construct
 function renderBook() {
   myLibrary.forEach(Book => {
     let bookEntry = document.createElement('div');
@@ -65,9 +55,11 @@ function renderBook() {
     authorInfo.textContent = ' by ' + Book.author;
     bookDetails.appendChild(authorInfo);
     
+    let pageOrPages = (Book.pages > 1) ? "pages": "page";
+
     let pagesInfo = document.createElement('p')
     pagesInfo.classList.add('pages-info');
-    pagesInfo.textContent = Book.pages + ' pages';
+    pagesInfo.textContent = Book.pages + ` ${pageOrPages}`;
     bookDetails.appendChild(pagesInfo);
     
     let readStatus = document.createElement('p');
@@ -109,9 +101,6 @@ function renderBook() {
 renderBook();
 
 addBook = () => {
-  // LEARNED using Date as a UNIQUE ID
-  // LEARNED how to use :checked to see if checkbox is checked
-  // LEARNED how to use ternary if statement
   this.id = Date.now();
   this.title = document.getElementById('title-name').value;
   this.author = document.getElementById('author-name').value;
@@ -125,9 +114,6 @@ addBook = () => {
   results.querySelectorAll('.bookEntry').forEach(e => e.remove());
   renderBook();
 }
-
-// LEARNED "type=button" needs to be attribute in button HTML!
-// .reset() works because it's working on the button type
 
 formAddNewBook.addEventListener('submit', function(e) {
   e.preventDefault();
