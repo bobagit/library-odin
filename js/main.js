@@ -4,11 +4,43 @@ const isBookCompleted = document.getElementById('readStatusBox')
 const modalSaveButton = document.getElementById('modal-save-button')
 const modalDeleteButton = document.getElementById('modal-delete-button')
 
-let myLibrary = [{
+
+function storageAvailable(type) {
+  var storage;
+  try {
+    storage = window[type];
+    var x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch (e) {
+    return e instanceof DOMException && (
+      // everything except Firefox
+      e.code === 22 ||
+      // Firefox
+      e.code === 1014 ||
+      // test me field too, bc code might not be present
+      // everything except Firefox
+      e.name === 'QuotaExceededError' ||
+      // Firefox
+      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      // acknowledge QuotaExceededError only if something already stored
+      (storage && storage.length !== 0);
+  }
+}
+
+
+
+
+
+
+let myLibrary = [
+      {
         id: 1606253742720,
-        title: "The Definitive Guide to Red Meat",
-        author: "Sir King Winsley",
-        pages: 1,
+        title: "Trust but Verify: Imagery Analysis in the Cold War",
+        author: "David T. Lindgren",
+        pages: 222,
         readStatus: true,
       },
       {
@@ -17,7 +49,8 @@ let myLibrary = [{
         author: "Dr. Elloit Charmer",
         pages: 230,
         readStatus: false,
-      }, {
+      }, 
+      {
         id: 1606353782720,
         title: "How To Raise A Vegan",
         author: "Karolin Hurtnowski",
@@ -85,14 +118,14 @@ function renderBook() {
     bookEntry.appendChild(tools)
 
     let editLibraryBookButton = document.createElement('img');
-    editLibraryBookButton.setAttribute('src', 'images/icon-edit.png')
+    editLibraryBookButton.setAttribute('src', 'images/icon-edit.png');
     editLibraryBookButton.classList.add('edit-btn');
     editLibraryBookButton.setAttribute('data-id', Book.id);
     tools.appendChild(editLibraryBookButton);
     
-    let bookDelete = document.createElement('span');
+    let bookDelete = document.createElement('img');
     bookDelete.classList.add('book-del-btn');
-    bookDelete.textContent = 'X';
+    bookDelete.setAttribute('src', 'images/icon-delete.png');
     bookDelete.setAttribute('data-id', Book.id);
     tools.appendChild(bookDelete);    
   });
@@ -186,11 +219,34 @@ results.addEventListener('click', function(e) {
       let getId = e.target.getAttribute('data-id');
       // find index in myLibrary of target book
       let index = myLibrary.findIndex(x => x.id == getId)
-      myLibrary.splice(index, 1)
+      myLibrary.splice(index, 1);
       modal.style.display = 'none';
       results.querySelectorAll('.bookEntry').forEach(e => e.remove());
       renderBook();
       e.stopImmediatePropagation()
     });
-   };
+
+    modalCancelButton.addEventListener('click', e => {
+      e.preventDefault();
+      modal.style.display = 'none';
+      e.stopImmediatePropagation()
+    });
+
+   } else if (e.target.classList.contains('book-del-btn')) {
+    // finds object based on ID
+    let index = myLibrary.find(x => x.id == getId)
+    myLibrary.splice(index, 1);
+    results.querySelectorAll('.bookEntry').forEach(e => e.remove());
+    renderBook();
+    e.stopImmediatePropagation();
+  } 
+   
 })
+
+
+
+// TODO
+// - add local storage
+// - connect to a database
+// - improve CSS
+// - fix mobile modal

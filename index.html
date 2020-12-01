@@ -88,23 +88,50 @@
       <h2 class="add-book-header">Edit Book</h2>
       <form id="modalForm">
         <label>Title</label>
-        <input id="modal-title" data-title="modal-title" onClick="this.select()">
+        <input id="modal-title" data-title="modal-title">
         <label>Author</label>
-        <input id="modal-author" data-author="modal-author" onClick="this.select()">
+        <input id="modal-author" data-author="modal-author">
         <label>Pages</label>
-        <input id="modal-pages" data-pages="modal-pages" onClick="this.select()">
+        <input id="modal-pages" data-pages="modal-pages">
         <div class="modal-read-status">
           <label>Finished book?</label>
           <input class="modal-checkbox" type="checkbox" id="read" name="read" value="true" data-read="read">
         </div>
-        <button type="submit" id="modal-save-button" class="modal-save-button" form="modalForm">Save</button>
-        <button type="submit" id="modal-delete-button" class="modal-delete-button" form="modalForm">Delete</button>
+        <div class="button-ctn">
+          <button type="submit" id="modal-save-button" class="modal-save-button" form="modalForm">Save</button>
+          <button type="submit" id="modal-cancel-button" class="modal-cancel-button" form="modalForm">Cancel</button>
+          <button type="submit" id="modal-delete-button" class="modal-delete-button" form="modalForm">Delete Book</button>
+        </div>
       </form>
   </div>
 </div>
 </section>
 
 <script src="js/main.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyD66Qds3zAT8-SVJ69dNRAxK-_zQZHRasg",
+    authDomain: "odinlibrary-b02aa.firebaseapp.com",
+    databaseURL: "https://odinlibrary-b02aa.firebaseio.com",
+    projectId: "odinlibrary-b02aa",
+    storageBucket: "odinlibrary-b02aa.appspot.com",
+    messagingSenderId: "345636736466",
+    appId: "1:345636736466:web:9ee6ec86538416f19acc0b",
+    measurementId: "G-ZS9KCXVMRF"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 </body>
 
 </html>

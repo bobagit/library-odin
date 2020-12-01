@@ -1,8 +1,11 @@
 $blue: #32608F
 $alink: #ffffff
 $alinkhover: #244566
+$orange: rgb(236, 101, 55)	
 $font: 'Trebuchet MS',Helvetica,Geneva,Arial,sans-serif
 $max-width: 1130px
+
+
 
 body
   font-family: $font
@@ -10,7 +13,14 @@ body
 @mixin box-shadow-both
   box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.15)
 
-
+@mixin submit-buttons
+  border: none
+  border-radius: 20px
+  background-color: $blue
+  color: $alink
+  font-weight: 700
+  outline: none
+  padding: 0.5rem 1.4rem
 
 ul
   list-style: none
@@ -152,7 +162,6 @@ body
           color: #e1e1e1
           padding: 0.2rem 0.5rem
   
-  
   .content-wrap
     display: flex
     justify-content: flex-start
@@ -167,7 +176,7 @@ body
       form
         display: flex
         flex-direction: column
-        width: 90%   
+        width: 100%   
         label
           font-weight: 700
           font-size: 0.9rem
@@ -179,7 +188,8 @@ body
             margin-top: 0.3rem
             width: auto
         button
-          width: 30%
+          @include submit-buttons
+          width: 5rem
           padding: 0.5rem
           margin: 0.5rem 0 0
 
@@ -248,7 +258,7 @@ body
     .modal
       display: none
       position: fixed
-      padding-top: 20rem
+      padding-top: 10rem
       left: 0;
       top: 0;
       width: 100%
@@ -261,31 +271,40 @@ body
         background-color: #ffffff
         padding: 1.25rem
         margin: auto
-        width: 50%
+        width: 100%
+        max-width: 400px
         min-width: 450px
+        box-shadow: 1px 1px 50px rgba(0,0,0, 0.2)
 
         form
           display: flex
           flex-direction: column
-          width: 90%   
+          width: 100%   
           label
             font-weight: 700
-            font-size: 0.9rem
+            font-size: 1rem
             margin: 0 0 0.3rem 0.1rem
           input
+            font-size: 1.2rem
             margin: 0 0 1rem 0
             padding: 0.5rem
             &.checkbox
-              margin-top: 0.3rem
+              margin: 0.4rem
               width: auto
-          button
-            width: 30%
-            padding: 0.5rem
-            margin: 0.5rem 0 0
-            &.modal-delete-button
-              background-color: red
-
-
+    
+          .button-ctn
+            margin-top: 0.5rem
+            display: flex
+            button
+              @include submit-buttons
+              &.modal-save-button
+                margin-right: 0.6rem
+              &.modal-cancel-button
+                background-color: #e1e1e1
+                color: #000000
+              &.modal-delete-button
+                background-color: $orange
+                margin-left: auto
 
         .close-btn
           display: flex
