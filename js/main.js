@@ -125,7 +125,6 @@ formAddNewBook.addEventListener('submit', function(e) {
 
 results.addEventListener('click', function(e) {
   e.preventDefault();
-  // LEARNED e.target.classList.contains
   let getId = e.target.getAttribute('data-id');
   if (e.target.classList.contains('edit-btn')) {
     // finds object based on ID
@@ -187,7 +186,6 @@ results.addEventListener('click', function(e) {
       let getId = e.target.getAttribute('data-id');
       // find index in myLibrary of target book
       let index = myLibrary.findIndex(x => x.id == getId)
-      
       myLibrary.splice(index, 1)
       modal.style.display = 'none';
       results.querySelectorAll('.bookEntry').forEach(e => e.remove());
