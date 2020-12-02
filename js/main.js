@@ -33,14 +33,14 @@ function storageAvailable(type) {
 
 let myLibrary = [
   {
-    id: 1606882569991,
+    id: 1606882563931,
     title: "Is Firebase Better Than Heroku?",
     author: "Bryon Sebastian",
     pages: 44,
     readStatus: false
   },
   {
-    id: 1606843569991,
+    id: 1606843564921,
     title: "JavaScript: The Definitive Guide, 7th Edition",
     author: "David Flanagan",
     pages: 706,
@@ -238,7 +238,8 @@ results.addEventListener('click', function(e) {
 
    } else if (e.target.classList.contains('book-del-btn')) {
     // finds object based on ID
-    let index = myLibrary.find(x => x.id == getId)
+    let getId = e.target.getAttribute('data-id');
+    let index = myLibrary.findIndex(x => x.id == getId)
     myLibrary.splice(index, 1);
     results.querySelectorAll('.bookEntry').forEach(e => e.remove());
     renderBook();
