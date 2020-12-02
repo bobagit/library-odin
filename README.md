@@ -1,8 +1,8 @@
 # Odin Project - Library / Book Project
 
-I used the [Berkeley Public Library](https://www.berkeleypubliclibrary.org/) site as the template for the design. I wrote the first attempt and nearly finished it, but ran into looping bugs near the end. That, coupled with general dissatisfaction for the quality of the code and organization, I decided to take a break, study, and attempt a complete refactor.
+I used the [Berkeley Public Library](https://www.berkeleypubliclibrary.org/) site as the template for the design. On my first attempt of the project, I ran into looping bugs. This held me up for a few days, so I decided to take a break, study, and attempt a complete refactor.
 
-I focused on chapter 15 of Flanagan's *(JavaScript: The Definitive Guide)[https://learning.oreilly.com/library/view/javascript-the-definitive/9781491952016/]* which covers events and propagation. I also reviewed [MDN's Intro to Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events). After three days of working on the same looping bug, I decided it would be worth it to review completed Odin Project code. I made a point to study the code and look up everything I didn't understand (and not just blindly paste in segments). In particular, [Gkuzin13](https://github.com/Gkuzin13/book-library) was one of the projects that made most sense to me, and is ultimately what got me over the hump — thank you!
+I focused on chapter 15 of Flanagan's *(JavaScript: The Definitive Guide)[https://learning.oreilly.com/library/view/javascript-the-definitive/9781491952016/]* on events and propagation. I also reviewed [MDN's Intro to Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events). After a few days of working on the same looping bug, I decided it would be worth it to review a few completed Odin projects. I made a point to study the code and look up everything I didn't understand (and not just blindly paste in segments). In particular, [Gkuzin13](https://github.com/Gkuzin13/book-library) was one of the projects that made most sense to me, and is ultimately what got me over the hump — thank you!
 
 ## What I Learned
 1. Better code organization 
@@ -29,13 +29,10 @@ function renderBook() {
 10. Learned about how to deal with checkboxes, ternary operators, and more
 
 ## The Looping Issue
-Initially, I was using a for loop to rebuild the library 'cards' after a card was added or modified, but it would duplicate the entry, but only after two or more modifications ere made to the library. 
+Initially, I was using a ```for loop``` to rebuild the array of objects after a card was added or modified, but it would duplicate the entries — but it would only do this after two or more modifications were made to the library. Adding an ID to each object, and referencing them by data attribute solved my issue.
 
 ## TODO
-- add local storage
-- connect to a database
+- add local storage (later)
+- connect to a Firebase (in progress)
 - improve CSS
 - fix mobile modal
-
-## Conclusion
-This project was a real confidence booster — as I finished it, I kept thinking about things I can build.

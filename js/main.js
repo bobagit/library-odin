@@ -3,6 +3,7 @@ const formAddNewBook = document.getElementById('add-form')
 const isBookCompleted = document.getElementById('readStatusBox')
 const modalSaveButton = document.getElementById('modal-save-button')
 const modalDeleteButton = document.getElementById('modal-delete-button')
+const modalCancelButton = document.getElementById('modal-cancel-button')
 
 // Local Storage Check Availability Function
 function storageAvailable(type) {
@@ -30,34 +31,32 @@ function storageAvailable(type) {
   }
 }
 
-
-
-
-
-
 let myLibrary = [
-      {
-        id: 1606253742720,
-        title: "Trust but Verify: Imagery Analysis in the Cold War",
-        author: "David T. Lindgren",
-        pages: 222,
-        readStatus: true,
-      },
-      {
-        id: 1606251732520,
-        title: "Home Decor 101",
-        author: "Dr. Elloit Charmer",
-        pages: 230,
-        readStatus: false,
-      }, 
-      {
-        id: 1606353782720,
-        title: "How To Raise A Vegan",
-        author: "Karolin Hurtnowski",
-        pages: 1321,
-        readStatus: false,
-      }
-      ];
+  {
+    id: 1606882569991,
+    title: "Is Firebase Better Than Heroku?",
+    author: "Bryon Sebastian",
+    pages: 44,
+    readStatus: false
+  },
+  {
+    id: 1606843569991,
+    title: "JavaScript: The Definitive Guide, 7th Edition",
+    author: "David Flanagan",
+    pages: 706,
+    readStatus: true
+  }
+];
+
+renderBook();
+
+// // Get objects from Firebase
+// const dbRefObject = firebase.database().ref().child('object');
+// dbRefObject.on('value', snap => {
+//   results.querySelectorAll('.bookEntry').forEach(e => e.remove());
+//   myLibrary.push(snap.val())
+//   renderBook();
+// })
 
 function Book(id, title, author, pages, readStatus) {
     this.id = id,
@@ -131,8 +130,6 @@ function renderBook() {
   });
 };
 
-renderBook();
-
 addBook = () => {
   this.id = Date.now();
   this.title = document.getElementById('title-name').value;
@@ -141,8 +138,15 @@ addBook = () => {
   this.readStatus = (isBookCompleted.checked == true) ? true : false;
   // Add new object to Library
   let addNewBook = new Book(id, title, author, pages, readStatus);
+  
+  // Old local object library
   myLibrary.push(addNewBook);
   
+  // Add to Firebase
+  // let fbDatabase = firebase.database().ref().child('object');
+  // let newEntry = fbDatabase.push();
+  // newEntry.update(addNewBook);
+
   // Remove rendered books
   results.querySelectorAll('.bookEntry').forEach(e => e.remove());
   renderBook();
@@ -243,17 +247,6 @@ results.addEventListener('click', function(e) {
    
 })
 
-// get Elements
-const preObject = document.getElementById('object');
-
-// create references
-const dbRefObject = firebase.database().ref().child('object');
-
-// Sync object changes
-// value syncs entire thing
-// callback 
-// data "snap"shot, returns more than just value
-dbRefObject.on('value', snap => console.log(snap.val()));
 
 
 // TODO
